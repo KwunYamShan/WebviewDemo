@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk rootProject.compileSdk
+    rootProject.compileSdk
+    defaultConfig {
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures{
+        dataBinding true
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.aar'], dir: 'libs')
+//    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+//    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+//    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.3' //核心必须依赖
+//    implementation 'io.github.scwang90:refresh-header-classics:2.0.3' //经典刷新头
+
+    api project(":common")
+    annotationProcessor rootProject.googleAutoServiceDependency
+    implementation rootProject.googleAutoServiceDependency
+    kapt rootProject.googleAutoServiceDependency
+
+}
